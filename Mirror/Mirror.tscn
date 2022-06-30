@@ -4,7 +4,7 @@
 [ext_resource path="res://Mirror/Mirror.material" type="Material" id=2]
 
 [sub_resource type="QuadMesh" id=11]
-size = Vector2( 2, 5 )
+size = Vector2( 2, 2 )
 
 [node name="Mirror" type="Spatial"]
 script = ExtResource( 1 )
@@ -34,5 +34,3 @@ transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0
 layers = 4
 mesh = SubResource( 11 )
 material/0 = ExtResource( 2 )
-
-[node name="MeshInstance2" type="MeshInstance" parent="."]

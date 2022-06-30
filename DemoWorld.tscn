@@ -42,7 +42,4 @@ skeleton = NodePath("../../..")
 material/0 = null
 
 [node name="Mirror" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.784365, 0, -0.620299, 0, 1, 0, 0.620299, 0, 0.784365, -3.03776, 0.817215, 4.67161 )
-size = Vector2( 2, 5 )
 MainCamPath = NodePath("../Spatial/CameraRod/MainCamera")
-culledVisualLayers = [ 2, 1 ]

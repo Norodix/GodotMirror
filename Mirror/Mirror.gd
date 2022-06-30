@@ -1,10 +1,12 @@
 extends Spatial
-tool
+
+const whitegreen : Color = Color(0.9, 0.97, 0.94)
 
 export var size : Vector2 = Vector2(2, 2)
 export var ResolutionPerUnit = 600
 export(NodePath) var MainCamPath = ""
-export(Array, int) var culledVisualLayers = [2]
+export(Array, int) var cullMask = [2]
+export(Color, RGB) var MirrorColor = whitegreen
 
 var MainCam : Camera = null
 var cam : Camera
@@ -23,11 +25,14 @@ func _process(delta):
 	
 	#Cull camera layers
 	cam.cull_mask = 0xFF
-	for i in culledVisualLayers:
+	for i in cullMask:
 		cam.cull_mask &= ~(1<<i)
 
 	mirror.mesh.size = size
 	$Viewport.size = size * ResolutionPerUnit
+	
+	#Set tint color
+	mirror.get_active_material(0).set_shader_param("albedo", MirrorColor)
 	
 	#Transform the mirror camera to the opposite side of the mirror plane
 	var MirrorNormal = mirror.global_transform.basis.z	

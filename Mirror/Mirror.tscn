@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Mirror/Mirror.gd" type="Script" id=1]
+[ext_resource path="res://Mirror/Mirror.material" type="Material" id=2]
+
+[sub_resource type="QuadMesh" id=11]
+size = Vector2( 2, 5 )
+
+[node name="Mirror" type="Spatial"]
+script = ExtResource( 1 )
+culledVisualLayers = [  ]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 3000, 3000 )
+
+[node name="Camera" type="Camera" parent="Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406672, 1.21628, 8.51171 )
+keep_aspect = 0
+cull_mask = 1048571
+projection = 2
+size = 3.0
+frustum_offset = Vector2( -0.406672, -1.21628 )
+near = 8.51171
+far = 10000.0
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 0 )
+layers = 4
+mesh = SubResource( 11 )
+material/0 = ExtResource( 2 )
+
+[node name="MeshInstanceFlipped" type="MeshInstance" parent="."]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
+layers = 4
+mesh = SubResource( 11 )
+material/0 = ExtResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]

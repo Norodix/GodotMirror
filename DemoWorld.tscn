@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MainCamera.gd" type="Script" id=1]
+[ext_resource path="res://Mirror/Mirror.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SphereMesh" id=4]
+
+[sub_resource type="CapsuleMesh" id=7]
+radius = 0.33
+
+[node name="DemoWorld" type="Spatial"]
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 0.428, 0, 0, 0, 0.463, 0, 0, 0, 0.501, 0.311584, -0.508855, 0.519106 )
+layers = 2
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 0.428, 0, 0, 0, 0.463, 0, 0, 0, 0.501, 0.396369, 0.461957, 0.639832 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.396369, 0.461957, -1.66788 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( -0.999597, 0, -0.0283929, 0, 1, 0, 0.0283929, 0, -0.999597, 0.669393, 1.21628, 0.737649 )
+script = ExtResource( 1 )
+
+[node name="CameraRod" type="Spatial" parent="Spatial"]
+
+[node name="MainCamera" type="Camera" parent="Spatial/CameraRod"]
+near = 0.3
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial/CameraRod"]
+transform = Transform( 1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, -0.4, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = null
+
+[node name="Mirror" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.784365, 0, -0.620299, 0, 1, 0, 0.620299, 0, 0.784365, -3.03776, 0.817215, 4.67161 )
+size = Vector2( 2, 5 )
+MainCamPath = NodePath("../Spatial/CameraRod/MainCamera")
+culledVisualLayers = [ 2, 1 ]

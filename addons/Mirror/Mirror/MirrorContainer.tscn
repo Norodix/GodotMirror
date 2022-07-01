@@ -6,6 +6,10 @@
 size = Vector2( 2, 2 )
 
 [node name="MirrorContainer" type="Spatial"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 3000, 3000 )

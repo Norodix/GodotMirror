@@ -6,7 +6,7 @@ const whitegreen : Color = Color(0.9, 0.97, 0.94)
 export var size : Vector2 = Vector2(2, 2)
 export var ResolutionPerUnit = 600
 export(NodePath) var MainCamPath = ""
-export(Array, int) var cullMask = [2]
+export(Array, int) var cullMask = []
 export(Color, RGB) var MirrorColor = whitegreen
 
 var MainCam : Camera = null
@@ -48,9 +48,10 @@ func _process(delta):
 	
 	#Look parallel into the mirror plane for frostum camera
 	cam.global_transform = cam.global_transform.looking_at(cam.global_transform.origin/2 + MainCam.global_transform.origin/2, \
-									Vector3.UP)
+									mirror.global_transform.basis.y)
 	var cam2mirror_offset = mirror.global_transform.origin - cam.global_transform.origin
 	var near = abs((cam2mirror_offset).dot(MirrorNormal)) #near plane distance
+	near += 0.05 #avoid rendering own surface
 	#transform offset to camera's local coordinate system (frostum offset uses local space)
 	var cam2mirror_camlocal = cam.global_transform.basis.inverse() * cam2mirror_offset
 	var frostum_offset =  Vector2(cam2mirror_camlocal.x, cam2mirror_camlocal.y)

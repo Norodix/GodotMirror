@@ -1,4 +1,5 @@
 extends Spatial
+tool
 
 const whitegreen : Color = Color(0.9, 0.97, 0.94)
 
@@ -11,11 +12,17 @@ export(Color, RGB) var MirrorColor = whitegreen
 var MainCam : Camera = null
 var cam : Camera
 var mirror : MeshInstance
+var viewport : Viewport
+
+func _enter_tree():
+	var node = load("res://addons/Mirror/Mirror/MirrorContainer.tscn").instance()
+	add_child(node)
 
 func _ready():
 	MainCam = get_node_or_null(MainCamPath)
-	cam = $Viewport/Camera
-	mirror = $MeshInstance
+	cam = $MirrorContainer/Viewport/Camera
+	mirror = $MirrorContainer/MeshInstance
+	viewport = $MirrorContainer/Viewport
 	pass # Replace with function body.
 
 func _process(delta):
@@ -29,7 +36,7 @@ func _process(delta):
 		cam.cull_mask &= ~(1<<i)
 
 	mirror.mesh.size = size
-	$Viewport.size = size * ResolutionPerUnit
+	viewport.size = size * ResolutionPerUnit
 	
 	#Set tint color
 	mirror.get_active_material(0).set_shader_param("albedo", MirrorColor)

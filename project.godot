@@ -24,6 +24,10 @@ config/name="GodotMirror"
 config/description="A mirror resource and demo scene for a versatile mirror."
 run/main_scene="res://DemoWorld.tscn"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/Mirror/plugin.cfg" )
+
 [input]
 
 ui_left={

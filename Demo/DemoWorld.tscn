@@ -43,4 +43,6 @@ material/0 = null
 
 [node name="Mirror" type="Spatial" parent="."]
 script = ExtResource( 2 )
+size = Vector2( 20, 2 )
 MainCamPath = NodePath("../Player/CameraRod/MainCamera")
+MirrorDistortion = 1.35

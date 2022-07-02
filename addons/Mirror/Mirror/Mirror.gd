@@ -4,10 +4,11 @@ extends Spatial
 const whitegreen : Color = Color(0.9, 0.97, 0.94)
 
 export var size : Vector2 = Vector2(2, 2)
-export var ResolutionPerUnit = 600
+export var ResolutionPerUnit = 100
 export(NodePath) var MainCamPath = ""
 export(Array, int) var cullMask = []
 export(Color, RGB) var MirrorColor = whitegreen
+export(float, 0, 30, 0.01) var MirrorDistortion = 0
 
 var MainCam : Camera = null
 var cam : Camera
@@ -45,6 +46,8 @@ func _process(delta):
 	
 	# Set tint color
 	mirror.get_active_material(0).set_shader_param("albedo", MirrorColor)
+	# Set distortion strength
+	mirror.get_active_material(0).set_shader_param("surface_strength", MirrorDistortion)
 	
 	# Transform the mirror camera to the opposite side of the mirror plane
 	var MirrorNormal = mirror.global_transform.basis.z	

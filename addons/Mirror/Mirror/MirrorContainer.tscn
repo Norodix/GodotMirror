@@ -3,7 +3,7 @@
 [ext_resource path="res://addons/Mirror/Mirror/Mirror.material" type="Material" id=1]
 
 [sub_resource type="QuadMesh" id=11]
-size = Vector2( 2, 2 )
+size = Vector2( 20, 2 )
 
 [node name="MirrorContainer" type="Spatial"]
 __meta__ = {
@@ -12,7 +12,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 3000, 3000 )
+size = Vector2( 100, 100 )
 
 [node name="Camera" type="Camera" parent="Viewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406672, 1.21628, 8.51171 )

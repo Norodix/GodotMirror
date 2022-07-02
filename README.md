@@ -9,6 +9,7 @@ Mirror properties that can be adjusted:
  - Size
  - Visible visual layers
  - Player camera
+ - Distortion
 
  ## Usage
 

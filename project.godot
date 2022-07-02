@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "TpsCamera",
 "language": "GDScript",
-"path": "res://MainCamera.gd"
+"path": "res://Demo/MainCamera.gd"
 } ]
 _global_script_class_icons={
 "TpsCamera": ""
@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="GodotMirror"
 config/description="A mirror resource and demo scene for a versatile mirror."
-run/main_scene="res://DemoWorld.tscn"
+run/main_scene="res://Demo/DemoWorld.tscn"
 
 [editor_plugins]
 
@@ -65,4 +65,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://Demo/default_env.tres"

@@ -1,6 +1,6 @@
 # Godot Mirror
 
-![mirror](Screenshots/Mirror.png)
+![mirror](Demo/Mirror.png)
 
 A plugin created for godot to instance mirrors in a 3D scene. The mirrors use additional cameras to render the scene from a mirrored perspective.
 

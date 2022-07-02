@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://MainCamera.gd" type="Script" id=1]
+[ext_resource path="res://Demo/MainCamera.gd" type="Script" id=1]
 [ext_resource path="res://addons/Mirror/Mirror/Mirror.gd" type="Script" id=2]
 
 [sub_resource type="SphereMesh" id=4]
@@ -27,7 +27,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Player" type="Spatial" parent="."]
-transform = Transform( 0.733279, 0, -0.679928, 0, 1, 0, 0.679928, 0, 0.733279, -3.97926, 0.611678, 3.23258 )
+transform = Transform( 0.733279, 0, -0.679928, 0, 1, 0, 0.679928, 0, 0.733279, -3.01042, 0.611678, 3.23258 )
 script = ExtResource( 1 )
 
 [node name="CameraRod" type="Spatial" parent="Player"]

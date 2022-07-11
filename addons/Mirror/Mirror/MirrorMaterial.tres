@@ -1,6 +1,14 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://addons/Mirror/Mirror/Mirror.gdshader" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=13]
+octaves = 2
+persistence = 0.7
+
+[sub_resource type="NoiseTexture" id=14]
+seamless = true
+noise = SubResource( 13 )
 
 [sub_resource type="ViewportTexture" id=12]
 flags = 4
@@ -12,3 +20,4 @@ shader = ExtResource( 1 )
 shader_param/tint = Color( 0.98, 0.98, 0.98, 1 )
 shader_param/distort_strength = null
 shader_param/mirror_tex = SubResource( 12 )
+shader_param/distort_tex = SubResource( 14 )

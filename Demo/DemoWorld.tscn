@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Demo/MainCamera.gd" type="Script" id=1]
 [ext_resource path="res://addons/Mirror/Mirror/Mirror.gd" type="Script" id=2]
@@ -7,6 +7,13 @@
 
 [sub_resource type="CapsuleMesh" id=7]
 radius = 0.33
+
+[sub_resource type="OpenSimplexNoise" id=8]
+period = 38.9
+
+[sub_resource type="NoiseTexture" id=9]
+seamless = true
+noise = SubResource( 8 )
 
 [node name="DemoWorld" type="Spatial"]
 
@@ -43,6 +50,14 @@ material/0 = null
 
 [node name="Mirror" type="Spatial" parent="."]
 script = ExtResource( 2 )
-size = Vector2( 20, 2 )
+ResolutionPerUnit = 200
 MainCamPath = NodePath("../Player/CameraRod/MainCamera")
-MirrorDistortion = 1.35
+MirrorColor = Color( 1, 1, 1, 1 )
+
+[node name="Mirror2" type="Spatial" parent="."]
+transform = Transform( 0.658492, 0, -0.752587, 0, 1, 0, 0.752587, 0, 0.658492, 2.4934, 0, 0.705538 )
+script = ExtResource( 2 )
+ResolutionPerUnit = 200
+MainCamPath = NodePath("../Player/CameraRod/MainCamera")
+MirrorDistortion = 20.0
+DistortionTexture = SubResource( 9 )

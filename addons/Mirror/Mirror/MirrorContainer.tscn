@@ -3,7 +3,7 @@
 [ext_resource path="res://addons/Mirror/Mirror/MirrorMaterial.tres" type="Material" id=1]
 
 [sub_resource type="QuadMesh" id=11]
-size = Vector2( 20, 2 )
+size = Vector2( 2, 2 )
 
 [node name="MirrorContainer" type="Spatial"]
 __meta__ = {

@@ -46,7 +46,7 @@ func _process(delta):
 	viewport.size = size * ResolutionPerUnit
 	
 	# Set tint color
-	mirror.get_active_material(0).set_shader_param("albedo", MirrorColor)
+	mirror.get_active_material(0).set_shader_param("tint", MirrorColor)
 	
 	# Set distortion texture
 	mirror.get_active_material(0).set_shader_param("distort_tex", DistortionTexture)

@@ -7,7 +7,7 @@ uniform sampler2D distort_tex : source_color;
 uniform float distort_strength : hint_range(0, 30);
 
 void vertex() {
-	UV = 1.0 - UV;
+	UV.x = 1.0 - UV.x;
 }
 
 //vec3 lin_to_srgb(vec3 col) {

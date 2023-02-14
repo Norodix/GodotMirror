@@ -5,18 +5,18 @@
 [sub_resource type="QuadMesh" id=11]
 size = Vector2( 2, 2 )
 
-[node name="MirrorContainer" type="Spatial"]
+[node name="MirrorContainer" type="Node3D"]
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="Viewport" type="Viewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2( 100, 100 )
 keep_3d_linear = true
 
-[node name="Camera" type="Camera" parent="Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406672, 1.21628, 8.51171 )
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406672, 1.21628, 8.51171 )
 keep_aspect = 0
 cull_mask = 1048571
 projection = 2
@@ -25,8 +25,8 @@ frustum_offset = Vector2( -0.406672, -1.21628 )
 near = 8.51171
 far = 10000.0
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 0 )
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 0 )
 layers = 4
 mesh = SubResource( 11 )
 skeleton = NodePath("../..")

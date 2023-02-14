@@ -1,9 +1,9 @@
-tool
+@tool
 extends EditorPlugin
 
 
 func _enter_tree():
-	add_custom_type("Mirror", "Spatial", preload("Mirror/Mirror.gd"), preload("icon.svg"))
+	add_custom_type("Mirror", "Node3D", preload("Mirror/Mirror.gd"), preload("icon.svg"))
 	pass
 
 

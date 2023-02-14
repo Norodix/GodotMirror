@@ -4,7 +4,7 @@
 
 [sub_resource type="ViewportTexture" id=12]
 flags = 4
-viewport_path = NodePath("Viewport")
+viewport_path = NodePath("SubViewport")
 
 [resource]
 resource_local_to_scene = true

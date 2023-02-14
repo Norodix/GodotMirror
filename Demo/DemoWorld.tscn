@@ -13,9 +13,12 @@ background_mode = 2
 sky = SubResource("Sky_bigpx")
 
 [sub_resource type="SphereMesh" id="4"]
+radius = 1.0
+height = 2.0
 
 [sub_resource type="CapsuleMesh" id="7"]
 radius = 0.33
+height = 1.66
 
 [sub_resource type="FastNoiseLite" id="8"]
 
@@ -51,7 +54,7 @@ script = ExtResource("1")
 near = 0.3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CameraRod"]
-transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, -0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 mesh = SubResource("7")
 skeleton = NodePath("../../..")
 

@@ -2,21 +2,13 @@ shader_type spatial;
 render_mode cull_disabled, unshaded;
 
 uniform vec4 tint : source_color = vec4(vec3(0.98),1.0);
-uniform sampler2D mirror_tex;
+uniform sampler2D mirror_tex : source_color;
 uniform sampler2D distort_tex : source_color;
 uniform float distort_strength : hint_range(0, 30);
 
 void vertex() {
 	UV.x = 1.0 - UV.x;
 }
-
-//vec3 lin_to_srgb(vec3 col) {
-//	return mix(
-//		pow((col + vec3(0.055)) * (1.0 / (1.0 + 0.055)),vec3(2.4)),
-//		col * (1.0 / 12.92),
-//		lessThan(col,vec3(0.04045))
-//		);
-//}
 
 void fragment() {
 	vec2 m_UV = UV;

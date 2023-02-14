@@ -1,33 +1,28 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://b51uk2h1t8l33"]
 
-[ext_resource path="res://addons/Mirror/Mirror/MirrorMaterial.tres" type="Material" id=1]
+[ext_resource type="Material" uid="uid://cp471l6edt4ab" path="res://addons/Mirror/Mirror/MirrorMaterial.tres" id="1"]
 
-[sub_resource type="QuadMesh" id=11]
-size = Vector2( 2, 2 )
+[sub_resource type="QuadMesh" id="11"]
+size = Vector2(2, 2)
 
 [node name="MirrorContainer" type="Node3D"]
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2( 100, 100 )
-keep_3d_linear = true
+size = Vector2i(100, 100)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406672, 1.21628, 8.51171 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406672, 1.21628, 8.51171)
 keep_aspect = 0
 cull_mask = 1048571
 projection = 2
 size = 3.0
-frustum_offset = Vector2( -0.406672, -1.21628 )
+frustum_offset = Vector2(-0.406672, -1.21628)
 near = 8.51171
 far = 10000.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D( 1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 0 )
+transform = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 0)
 layers = 4
-mesh = SubResource( 11 )
+mesh = SubResource("11")
 skeleton = NodePath("../..")
-material/0 = ExtResource( 1 )
+surface_material_override/0 = ExtResource("1")

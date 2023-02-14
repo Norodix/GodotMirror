@@ -1,7 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://0576fim4xnjw"]
+[gd_scene load_steps=10 format=3 uid="uid://0576fim4xnjw"]
 
 [ext_resource type="Script" path="res://Demo/MainCamera.gd" id="1"]
 [ext_resource type="Script" path="res://addons/Mirror/Mirror/Mirror.gd" id="2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_omm3q"]
+
+[sub_resource type="Sky" id="Sky_bigpx"]
+sky_material = SubResource("ProceduralSkyMaterial_omm3q")
+
+[sub_resource type="Environment" id="Environment_y6thg"]
+background_mode = 2
+sky = SubResource("Sky_bigpx")
 
 [sub_resource type="SphereMesh" id="4"]
 
@@ -15,6 +24,9 @@ seamless = true
 noise = SubResource("8")
 
 [node name="DemoWorld" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_y6thg")
 
 [node name="MeshInstance2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.311584, -0.508855, 0.519106)
@@ -54,5 +66,5 @@ transform = Transform3D(0.658492, 0, -0.752587, 0, 1, 0, 0.752587, 0, 0.658492, 
 script = ExtResource("2")
 ResolutionPerUnit = 200
 MainCamPath = NodePath("../Player/CameraRod/MainCamera")
-MirrorDistortion = 20.0
+MirrorDistortion = 20
 DistortionTexture = SubResource("9")

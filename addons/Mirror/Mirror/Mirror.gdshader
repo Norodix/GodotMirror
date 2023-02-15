@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode cull_disabled, unshaded;
 
 uniform vec4 tint : source_color = vec4(vec3(0.98),1.0);
-uniform sampler2D mirror_tex : source_color;
+uniform sampler2D mirror_tex : source_color, repeat_disable;
 uniform sampler2D distort_tex : source_color;
 uniform float distort_strength : hint_range(0, 30);
 

@@ -2,6 +2,8 @@
 
 ![mirror](Screenshots/Mirror.png)
 
+This version is compatible with Godot 4.0.1.
+
 A plugin created for godot to instance mirrors in a 3D scene. The mirrors use additional cameras to render the scene from a mirrored perspective.
 
 Mirror properties that can be adjusted:
@@ -23,3 +25,7 @@ Mirror properties that can be adjusted:
  ## Installation
 
  Copy the addons/Mirror folder into your godot root directory, same as the asset library installs addons. Enable the plugin in Project settings/Plugins.
+
+ ## Limitations
+
+ Multiple mirrors do not work properly if you can see one mirror in the reflection of the other mirror.

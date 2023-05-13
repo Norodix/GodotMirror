@@ -34,6 +34,7 @@ var speed = 0.1
 
 func _ready() -> void:
 	self.is_cursor_visible = false
+	#Since we know this will be the main camera, we must assign it as the main camera on startup
 	MirrorManager.main_camera = camera
 
 

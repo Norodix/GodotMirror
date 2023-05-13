@@ -39,7 +39,8 @@ func _ready():
 
 func _process(delta):
 	_ready() # need to reload for proper operation when used as a toolscript
-	if Engine.is_editor_hint():
+	
+	if Engine.is_editor_hint(): # stops from running in the editor to avoid failed calculations
 		return
 	elif MirrorManager.main_camera == null:
 		# No camera specified for the mirror to operate checked

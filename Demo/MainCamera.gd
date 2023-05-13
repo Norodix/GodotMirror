@@ -34,6 +34,7 @@ var speed = 0.1
 
 func _ready() -> void:
 	self.is_cursor_visible = false
+	MirrorManager.main_camera = camera
 
 
 func _process(delta: float) -> void:

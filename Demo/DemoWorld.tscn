@@ -61,13 +61,11 @@ skeleton = NodePath("../../..")
 [node name="Mirror" type="Node3D" parent="."]
 script = ExtResource("2")
 ResolutionPerUnit = 200
-MainCamPath = NodePath("../Player/CameraRod/MainCamera")
 MirrorColor = Color(1, 1, 1, 1)
 
 [node name="Mirror2" type="Node3D" parent="."]
 transform = Transform3D(0.658492, 0, -0.752587, 0, 1, 0, 0.752587, 0, 0.658492, 2.4934, 0, 0.705538)
 script = ExtResource("2")
 ResolutionPerUnit = 200
-MainCamPath = NodePath("../Player/CameraRod/MainCamera")
 MirrorDistortion = 20
 DistortionTexture = SubResource("9")

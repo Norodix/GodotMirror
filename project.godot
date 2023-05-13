@@ -15,6 +15,10 @@ config/description="A mirror resource and demo scene for a versatile mirror."
 run/main_scene="res://Demo/DemoWorld.tscn"
 config/features=PackedStringArray("4.0")
 
+[autoload]
+
+MirrorManager="*res://addons/Mirror/MirrorManager.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Mirror/plugin.cfg")

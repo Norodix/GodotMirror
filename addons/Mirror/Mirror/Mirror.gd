@@ -9,9 +9,6 @@ const whitegreen : Color = Color(0.9, 0.97, 0.94)
 ## Resolution of the rendered viewport is Size*ResolutionPerUnit
 @export var ResolutionPerUnit = 100
 
-## The NodePath to the main camera
-@export var MainCamPath: NodePath = ""
-
 ## The cull mask array contains the visual layers which are NOT rendered. The render layers numbering is different from their indexing. To avoid rendering layer 1 add a 0 element to the list. To avoid rendering layer 2 add a 1 element to the list and so on.
 @export var cullMask : Array[int] = []
 
@@ -24,7 +21,6 @@ const whitegreen : Color = Color(0.9, 0.97, 0.94)
 ## The distortion texture of the mirror
 @export var DistortionTexture: Texture2D
 
-var MainCam : Camera3D = null
 var cam : Camera3D
 var mirror : MeshInstance3D
 var viewport : SubViewport
@@ -36,7 +32,6 @@ func _enter_tree():
 
 
 func _ready():
-	MainCam = get_node_or_null(MainCamPath)
 	cam = $MirrorContainer/SubViewport/Camera3D
 	mirror = $MirrorContainer/MeshInstance3D
 	viewport = $MirrorContainer/SubViewport
@@ -44,7 +39,9 @@ func _ready():
 
 func _process(delta):
 	_ready() # need to reload for proper operation when used as a toolscript
-	if MainCam == null:
+	if Engine.is_editor_hint():
+		return
+	elif MirrorManager.main_camera == null:
 		# No camera specified for the mirror to operate checked
 		return
 	
@@ -69,11 +66,11 @@ func _process(delta):
 	# Transform3D the mirror camera to the opposite side of the mirror plane
 	var MirrorNormal = mirror.global_transform.basis.z	
 	var MirrorTransform =  Mirror_transform(MirrorNormal, mirror.global_transform.origin)
-	cam.global_transform = MirrorTransform * MainCam.global_transform
+	cam.global_transform = MirrorTransform * MirrorManager.main_camera.global_transform
 	
 	# Look perpendicular into the mirror plane for frostum camera
 	cam.global_transform = cam.global_transform.looking_at(
-			cam.global_transform.origin/2 + MainCam.global_transform.origin/2, \
+			cam.global_transform.origin/2 + MirrorManager.main_camera.global_transform.origin/2, \
 			mirror.global_transform.basis.y
 		)
 	var cam2mirror_offset = mirror.global_transform.origin - cam.global_transform.origin

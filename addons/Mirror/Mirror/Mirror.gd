@@ -1,19 +1,12 @@
 @tool
 extends Node3D
 
-const whitegreen : Color = Color(0.9, 0.97, 0.94)
-
-## Size of the mirror in world units
-@export var size : Vector2 = Vector2(2, 2)
-
-## Resolution of the rendered viewport is Size*ResolutionPerUnit
-@export var ResolutionPerUnit = 100
-
 ## The cull mask array contains the visual layers which are NOT rendered. The render layers numbering is different from their indexing. To avoid rendering layer 1 add a 0 element to the list. To avoid rendering layer 2 add a 1 element to the list and so on.
 @export var cullMask : Array[int] = []
 
 ## Tint color of the mirror surface
 @export_color_no_alpha var MirrorColor : Color = whitegreen
+const whitegreen : Color = Color(0.9, 0.97, 0.94)
 
 ## Distortion multiplier of the mirror
 @export_range(0, 30, 0.01) var MirrorDistortion = 0
@@ -21,9 +14,9 @@ const whitegreen : Color = Color(0.9, 0.97, 0.94)
 ## The distortion texture of the mirror
 @export var DistortionTexture: Texture2D
 
-var cam : Camera3D
-var mirror : MeshInstance3D
-var viewport : SubViewport
+@onready var cam : Camera3D = $MirrorContainer/SubViewport/Camera3D
+@onready var mirror : MeshInstance3D = $MirrorContainer/MeshInstance3D
+@onready var viewport : SubViewport = $MirrorContainer/SubViewport
 
 
 func _enter_tree():
@@ -31,14 +24,8 @@ func _enter_tree():
 	add_child(node)
 
 
-func _ready():
-	cam = $MirrorContainer/SubViewport/Camera3D
-	mirror = $MirrorContainer/MeshInstance3D
-	viewport = $MirrorContainer/SubViewport
-
-
 func _process(delta):
-	_ready() # need to reload for proper operation when used as a toolscript
+	#_ready() # need to reload for proper operation when used as a toolscript
 	
 	if Engine.is_editor_hint(): # stops from running in the editor to avoid failed calculations
 		return
@@ -51,10 +38,8 @@ func _process(delta):
 	for i in cullMask:
 		cam.cull_mask &= ~(1<<i)
 
-	# set mirror surface's size
-	mirror.mesh.size = size
 	# set viewport to specified resolution
-	viewport.size = size * ResolutionPerUnit
+	viewport.size = get_mirror_size_ratio() * MirrorManager.resolution
 	
 	# Set tint color
 	mirror.get_active_material(0).set_shader_parameter("tint", MirrorColor)
@@ -97,3 +82,9 @@ func Mirror_transform(n : Vector3, d : Vector3) -> Transform3D:
 	
 	return Transform3D(Basis(basisX, basisY, basisZ), offset)	
 	pass
+
+
+## Calculates a normalized ratio of the height and width of the mirror
+func get_mirror_size_ratio() -> Vector2:
+	var size_ratio : Vector2 = Vector2(transform.basis.get_scale().x, transform.basis.get_scale().y)
+	return size_ratio.normalized()

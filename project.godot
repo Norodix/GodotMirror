@@ -60,4 +60,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
 environment/default_environment="res://Demo/default_env.tres"

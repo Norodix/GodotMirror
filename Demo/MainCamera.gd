@@ -38,7 +38,7 @@ func _ready() -> void:
 	MirrorManager.main_camera = camera
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	process_basic_input()
 	
 	if Input.is_action_pressed("ui_up"):

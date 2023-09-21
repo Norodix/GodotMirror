@@ -33,6 +33,8 @@ var viewport : SubViewport
 func _enter_tree():
 	var node = preload("MirrorContainer.tscn").instantiate()
 	add_child(node)
+	var mesh_instance : MeshInstance3D = node.find_child("MeshInstance3D")
+	mesh_instance.mesh = mesh_instance.mesh.duplicate()
 
 
 func _ready():

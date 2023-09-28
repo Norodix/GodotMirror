@@ -1,22 +1,12 @@
 @tool
 extends Node3D
 
-const whitegreen : Color = Color(0.9, 0.97, 0.94)
-
-## Size of the mirror in world units
-@export var size : Vector2 = Vector2(2, 2)
-
-## Resolution of the rendered viewport is Size*ResolutionPerUnit
-@export var ResolutionPerUnit = 100
-
-## The NodePath to the main camera
-@export var MainCamPath: NodePath = ""
-
 ## The cull mask array contains the visual layers which are NOT rendered. The render layers numbering is different from their indexing. To avoid rendering layer 1 add a 0 element to the list. To avoid rendering layer 2 add a 1 element to the list and so on.
 @export var cullMask : Array[int] = []
 
 ## Tint color of the mirror surface
 @export_color_no_alpha var MirrorColor : Color = whitegreen
+const whitegreen : Color = Color(0.9, 0.97, 0.94)
 
 ## Distortion multiplier of the mirror
 @export_range(0, 30, 0.01) var MirrorDistortion = 0
@@ -24,10 +14,9 @@ const whitegreen : Color = Color(0.9, 0.97, 0.94)
 ## The distortion texture of the mirror
 @export var DistortionTexture: Texture2D
 
-var MainCam : Camera3D = null
-var cam : Camera3D
-var mirror : MeshInstance3D
-var viewport : SubViewport
+@onready var cam : Camera3D = $MirrorContainer/SubViewport/Camera3D
+@onready var mirror : MeshInstance3D = $MirrorContainer/MeshInstance3D
+@onready var viewport : SubViewport = $MirrorContainer/SubViewport
 
 
 func _enter_tree():
@@ -37,16 +26,12 @@ func _enter_tree():
 	mesh_instance.mesh = mesh_instance.mesh.duplicate()
 
 
-func _ready():
-	MainCam = get_node_or_null(MainCamPath)
-	cam = $MirrorContainer/SubViewport/Camera3D
-	mirror = $MirrorContainer/MeshInstance3D
-	viewport = $MirrorContainer/SubViewport
-
-
 func _process(delta):
-	_ready() # need to reload for proper operation when used as a toolscript
-	if MainCam == null:
+	#_ready() # need to reload for proper operation when used as a toolscript
+	
+	if Engine.is_editor_hint(): # stops from running in the editor to avoid failed calculations
+		return
+	elif MirrorManager.main_camera == null:
 		# No camera specified for the mirror to operate checked
 		return
 	
@@ -55,10 +40,8 @@ func _process(delta):
 	for i in cullMask:
 		cam.cull_mask &= ~(1<<i)
 
-	# set mirror surface's size
-	mirror.mesh.size = size
 	# set viewport to specified resolution
-	viewport.size = size * ResolutionPerUnit
+	viewport.size = get_mirror_size_ratio() * MirrorManager.resolution
 	
 	# Set tint color
 	mirror.get_active_material(0).set_shader_parameter("tint", MirrorColor)
@@ -71,11 +54,11 @@ func _process(delta):
 	# Transform3D the mirror camera to the opposite side of the mirror plane
 	var MirrorNormal = mirror.global_transform.basis.z	
 	var MirrorTransform =  Mirror_transform(MirrorNormal, mirror.global_transform.origin)
-	cam.global_transform = MirrorTransform * MainCam.global_transform
+	cam.global_transform = MirrorTransform * MirrorManager.main_camera.global_transform
 	
 	# Look perpendicular into the mirror plane for frostum camera
 	cam.global_transform = cam.global_transform.looking_at(
-			cam.global_transform.origin/2 + MainCam.global_transform.origin/2, \
+			cam.global_transform.origin/2 + MirrorManager.main_camera.global_transform.origin/2, \
 			mirror.global_transform.basis.y
 		)
 	var cam2mirror_offset = mirror.global_transform.origin - cam.global_transform.origin
@@ -101,3 +84,9 @@ func Mirror_transform(n : Vector3, d : Vector3) -> Transform3D:
 	
 	return Transform3D(Basis(basisX, basisY, basisZ), offset)	
 	pass
+
+
+## Calculates a normalized ratio of the height and width of the mirror
+func get_mirror_size_ratio() -> Vector2:
+	var size_ratio : Vector2 = Vector2(transform.basis.get_scale().x, transform.basis.get_scale().y)
+	return size_ratio.normalized()

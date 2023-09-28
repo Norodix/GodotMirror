@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://0576fim4xnjw"]
+[gd_scene load_steps=11 format=3 uid="uid://0576fim4xnjw"]
 
 [ext_resource type="Script" path="res://Demo/MainCamera.gd" id="1"]
 [ext_resource type="Script" path="res://addons/Mirror/Mirror/Mirror.gd" id="2"]
+[ext_resource type="Script" path="res://Demo/FPSLabel.gd" id="2_trh2v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_omm3q"]
 
@@ -58,16 +59,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 mesh = SubResource("7")
 skeleton = NodePath("../../..")
 
+[node name="FPS Label" type="Label" parent="Player/CameraRod"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("2_trh2v")
+
 [node name="Mirror" type="Node3D" parent="."]
 script = ExtResource("2")
-ResolutionPerUnit = 200
-MainCamPath = NodePath("../Player/CameraRod/MainCamera")
 MirrorColor = Color(1, 1, 1, 1)
 
 [node name="Mirror2" type="Node3D" parent="."]
 transform = Transform3D(0.658492, 0, -0.752587, 0, 1, 0, 0.752587, 0, 0.658492, 2.4934, 0, 0.705538)
 script = ExtResource("2")
-ResolutionPerUnit = 200
-MainCamPath = NodePath("../Player/CameraRod/MainCamera")
 MirrorDistortion = 20
 DistortionTexture = SubResource("9")
+
+[node name="Mirror3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.74169, 0)
+script = ExtResource("2")
+
+[node name="Rotation Tests" type="Node3D" parent="."]
